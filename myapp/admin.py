@@ -5,7 +5,8 @@ from .models import Task,Products
 
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('title', 'description')  # Перечислите поля, которые вы хотите видеть в списке объектов
+class ProductsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'description')
 
-
-admin.site.register(Products)
 admin.site.register(Task, TaskAdmin)
+admin.site.register(Products, ProductsAdmin)
