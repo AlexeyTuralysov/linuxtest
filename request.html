@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Data from Django API</title>
+</head>
+<body>
+
+<script>
+fetch('http://127.0.0.1:8000/api/products/')  // Замените 'URL_API' на ваш API-URL
+  .then(response => response.json())
+  .then(data => {
+    console.log('Data from API:', data); // Отображаем данные для отладки
+
+    if (data && data.length > 0) {
+      const priceInfo = data[0];  // Предполагается, что у вас только один продукт в списке
+
+      // Теперь вы можете использовать информацию о цене, например:
+      const productName = priceInfo.name;
+      const productDescription = priceInfo.description;
+      const imageSrc = priceInfo.images[0].image;
+
+      console.log('Product Name:', productName);
+      console.log('Product Description:', productDescription);
+      console.log('Image Source:', imageSrc);
+    } else {
+      console.error('No data received from the API');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+</script>
+
+</body>
+</html>

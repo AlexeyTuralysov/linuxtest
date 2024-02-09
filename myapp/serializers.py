@@ -1,12 +1,15 @@
 from rest_framework import serializers
-from .models import Task, Products
+from .models import *
 
-class TaskSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Task
-        fields = '__all__'
 
-class ProductsSerializer(serializers.ModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Products
-        fields = '__all__'
+        model = Image
+        fields = ('id', 'image')
+
+class ProductSerializer(serializers.ModelSerializer):
+    images = ImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'description', 'images')

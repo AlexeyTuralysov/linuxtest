@@ -1,14 +1,13 @@
-from django.shortcuts import render
+# myapp/views.py
+from rest_framework import generics, viewsets
+from .models import Product
+from .serializers import ProductSerializer
 
-# Create your views here.
-from rest_framework import generics
-from .models import Task, Products
-from .serializers import TaskSerializer,ProductsSerializer
+class ProductView(generics.ListCreateAPIView):
+    queryset = Product.objects.all() #получение инфы от бд
+    serializer_class = ProductSerializer
 
-class TaskListCreateView(generics.ListCreateAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
 
-class Products(generics.ListCreateAPIView):
-    queryset = Products.objects.all()
-    serializer_class = ProductsSerializer
+class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer

@@ -1,12 +1,12 @@
 from django.contrib import admin
+from .models import Product,Image
 
-# Register your models here.
-from .models import Task,Products
 
-class TaskAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description')  # Перечислите поля, которые вы хотите видеть в списке объектов
-class ProductsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'description')
+class ImageInline(admin.TabularInline):
+    model = Image
+    extra = 1
 
-admin.site.register(Task, TaskAdmin)
-admin.site.register(Products, ProductsAdmin)
+class ProductAdmin(admin.ModelAdmin):
+    inlines = [ImageInline]
+
+admin.site.register(Product, ProductAdmin)

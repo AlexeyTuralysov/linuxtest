@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-(a+ban&x!f-6u3xsdvki)c9rz^17%#l572q#g9+m51vxxvafwt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['213.171.3.17']
-
+#ALLOWED_HOSTS = ['213.171.3.17']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'corsheaders',
     'myapp',
 ]
 
@@ -49,8 +49,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'projectrest.urls'
 
 TEMPLATES = [
@@ -82,6 +85,19 @@ DATABASES = {
     }
 }
 
+
+""" 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rest_api_linux',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',  # Уберите "http://" из HOST
+        'PORT': '5432',  # Можете оставить пустым, если используется стандартный порт
+    }
+}
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -122,8 +138,13 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 import os
+
 STATIC_URL = '/static/'
-STATIC_ROOT = "/root/linuxtest/static"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
